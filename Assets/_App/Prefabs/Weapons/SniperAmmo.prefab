@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 33784154711203822}
   - component: {fileID: 23371176049507208}
   m_Layer: 0
-  m_Name: Mesh2_Group3_Group1_Model
+  m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54,7 +54,7 @@ GameObject:
   - component: {fileID: 33556523095064910}
   - component: {fileID: 23790024310075194}
   m_Layer: 0
-  m_Name: Mesh1_Group2_Group1_Model
+  m_Name: Shell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
