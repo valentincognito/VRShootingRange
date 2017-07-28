@@ -21,8 +21,7 @@ GameObject:
   - component: {fileID: 4178507978689442}
   - component: {fileID: 54535147458877152}
   - component: {fileID: 114311624916388822}
-  - component: {fileID: 114279112325405034}
-  - component: {fileID: 114400589807321542}
+  - component: {fileID: 114979658404563206}
   m_Layer: 0
   m_Name: Sniper
   m_TagString: Untagged
@@ -401,17 +400,6 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: bafe1e4d156ffe945aa89b304a97f261, type: 3}
---- !u!114 &114279112325405034
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1026647545322926}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0f8dce90ba0fa246bb3b249f146b935, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114311624916388822
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -430,7 +418,7 @@ MonoBehaviour:
   m_grabPoints:
   - {fileID: 64114880055183640}
   - {fileID: 64930611002462274}
---- !u!114 &114400589807321542
+--- !u!114 &114979658404563206
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -442,3 +430,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ammoStock: {fileID: 0}
+  spawnPoint: {fileID: 4132538699653076}
+  velocity: 1
