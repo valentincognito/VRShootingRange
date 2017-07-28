@@ -13,6 +13,18 @@ public class WeaponBehaviour : MonoBehaviour
 
     public void Shoot()
     {
-        Debug.Log("shoot");
+        Transform bullet = ammoStock.transform.GetChild(0);
+
+        if (bullet)
+        {
+            bullet.transform.position = spawnPoint.position;
+            //bullet.transform.rotation = spawnPoint.localRotation;
+            bullet.GetComponent<Rigidbody>().isKinematic = false;
+            bullet.GetComponent<Rigidbody>().velocity = spawnPoint.transform.forward * 5f;  
+            bullet.transform.parent = GameObject.FindWithTag("Projectiles").transform;
+            bullet.gameObject.SetActive(true);
+        }
+        
+
     }
 }
