@@ -431,4 +431,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ammoStock: {fileID: 0}
   spawnPoint: {fileID: 4132538699653076}
-  velocity: 1
+  velocity: 100

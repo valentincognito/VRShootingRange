@@ -17,14 +17,16 @@ public class WeaponBehaviour : MonoBehaviour
 
         if (bullet)
         {
+            Rigidbody rb = bullet.GetComponent<Rigidbody>();
+
+            bullet.transform.parent = spawnPoint.transform;
             bullet.transform.position = spawnPoint.position;
-            //bullet.transform.rotation = spawnPoint.localRotation;
-            bullet.GetComponent<Rigidbody>().isKinematic = false;
-            bullet.GetComponent<Rigidbody>().velocity = spawnPoint.transform.forward * 5f;  
+            bullet.transform.localEulerAngles = new Vector3(90, 0, 0);
+            rb.isKinematic = false;
+            rb.velocity = spawnPoint.transform.forward * velocity;
             bullet.transform.parent = GameObject.FindWithTag("Projectiles").transform;
             bullet.gameObject.SetActive(true);
         }
-        
 
     }
 }
