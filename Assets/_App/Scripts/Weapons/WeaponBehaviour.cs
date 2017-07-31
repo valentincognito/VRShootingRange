@@ -10,6 +10,8 @@ public class WeaponBehaviour : MonoBehaviour
     private Transform spawnPoint;
     [SerializeField]
     private float velocity;
+    [SerializeField]
+    private MagazineBehaviour magazineBehaviour;
 
     public void Shoot()
     {
@@ -18,6 +20,7 @@ public class WeaponBehaviour : MonoBehaviour
         if (bullet)
         {
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
+            AudioSource shoot = GetComponent<AudioSource>();
 
             bullet.transform.parent = spawnPoint.transform;
             bullet.transform.position = spawnPoint.position;
@@ -26,7 +29,12 @@ public class WeaponBehaviour : MonoBehaviour
             rb.velocity = spawnPoint.transform.forward * velocity;
             bullet.transform.parent = GameObject.FindWithTag("Projectiles").transform;
             bullet.gameObject.SetActive(true);
+            shoot.Play();
+
+            magazineBehaviour.DiscardBullet();
         }
 
     }
+
+    
 }
