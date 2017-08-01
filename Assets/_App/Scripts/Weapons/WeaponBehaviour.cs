@@ -11,6 +11,8 @@ public class WeaponBehaviour : MonoBehaviour
     [SerializeField]
     private float velocity;
     [SerializeField]
+    private ParticleSystem muzzleFlash;
+    [SerializeField]
     private MagazineBehaviour magazineBehaviour;
 
     public void Shoot()
@@ -29,6 +31,8 @@ public class WeaponBehaviour : MonoBehaviour
             rb.velocity = spawnPoint.transform.forward * velocity;
             bullet.transform.parent = GameObject.FindWithTag("Projectiles").transform;
             bullet.gameObject.SetActive(true);
+
+            muzzleFlash.Play();
             shoot.Play();
 
             magazineBehaviour.DiscardBullet();
