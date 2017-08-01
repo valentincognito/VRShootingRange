@@ -16,7 +16,7 @@ public class PlayerManager : MonoBehaviour
 
     void Update()
     {
-        if (OVRInput.GetDown(OVRInput.RawButton.LIndexTrigger))
+        if (OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger))
         {
             if (isArmed)
             {

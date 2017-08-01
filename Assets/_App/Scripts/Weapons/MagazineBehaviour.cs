@@ -5,12 +5,31 @@ using UnityEngine.UI;
 
 public class MagazineBehaviour : MonoBehaviour {
 
+    public Text bulletsCountDisplay;
+    public Text magazineCapacityDisplay;
+
     [SerializeField]
     private int magazineCapacity;
     [SerializeField]
-	private int bulletsCount;
+    private int bulletsCount;
 
-    public Text bulletsCountDisplay;
+    private OVRGrabbable ovrGrabbable;
+
+    private void Start()
+    {
+        ovrGrabbable = GetComponent<OVRGrabbable>();
+
+        magazineCapacityDisplay.text = magazineCapacity.ToString();
+        bulletsCountDisplay.text = bulletsCount.ToString();
+    }
+
+    private void Update()
+    {
+        if (ovrGrabbable.isGrabbed)
+        {
+            Debug.Log("Grabbed");
+        }
+    }
 
     public void DiscardBullet()
     {
@@ -21,17 +40,28 @@ public class MagazineBehaviour : MonoBehaviour {
         }
         else
         {
-            bulletsCountDisplay.text = "Reload";
+            //bulletsCountDisplay.text = "Reload";
         }
         
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.name == "GrabVolumeBig" && OVRInput.Get(OVRInput.RawAxis1D.RHandTrigger) > 0.2f)
+        if (other.name == "GrabVolumeBig" && OVRInput.Get(OVRInput.RawAxis1D.LHandTrigger) > 0.2f)
         {
             transform.parent = GameObject.FindWithTag("Projectiles").transform;
         }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.name == "MagazineClip")
+        {
+            Debug.Log("true");
+            //GetComponent<Rigidbody>().isKinematic = false;
+            GetComponent<Collider>().isTrigger = false;
+        }
+    }
+
 
 }
