@@ -8,12 +8,19 @@ public class MagazineBehaviour : MonoBehaviour {
     public Text bulletsCountDisplay;
     public Text magazineCapacityDisplay;
 
+    public float clipLimit;
+
     [SerializeField]
     private int magazineCapacity;
     [SerializeField]
     private int bulletsCount;
+    [SerializeField]
+    private WeaponBehaviour weaponBehaviour;
 
     private OVRGrabbable ovrGrabbable;
+    
+    public bool isClipped;
+    public float distance;
 
     private void Start()
     {
@@ -25,10 +32,41 @@ public class MagazineBehaviour : MonoBehaviour {
 
     private void Update()
     {
-        if (ovrGrabbable.isGrabbed)
+        if (ovrGrabbable.isGrabbed && !isClipped)
         {
-            Debug.Log("Grabbed");
+            distance = (weaponBehaviour.magazineClip.position - this.transform.position).magnitude;
         }
+
+        if (ovrGrabbable.isGrabbed && OVRInput.Get(OVRInput.RawAxis1D.LHandTrigger) < 0.2f)
+        {
+            if (distance > clipLimit)
+            {
+                // UnclipFromWeapon();
+                Invoke("UnclipFromWeapon", 0.1f);
+            }
+            else
+            {
+                ClipToWeapon();
+            }
+        }
+
+
+    }
+
+    private void ClipToWeapon()
+    {
+        transform.parent = weaponBehaviour.gameObject.transform.GetChild(1).transform;
+        transform.localPosition = new Vector3(0,0,0);
+        transform.localEulerAngles = new Vector3(0, 0, 0);
+        this.transform.GetComponent<Rigidbody>().isKinematic = true;
+        this.transform.GetComponent<Collider>().isTrigger = true;
+        isClipped = true;
+    }
+    private void UnclipFromWeapon()
+    {
+        this.transform.GetComponent<Rigidbody>().isKinematic = false;
+        this.transform.GetComponent<Collider>().isTrigger = false;
+        isClipped = false;
     }
 
     public void DiscardBullet()
@@ -49,17 +87,8 @@ public class MagazineBehaviour : MonoBehaviour {
     {
         if (other.name == "GrabVolumeBig" && OVRInput.Get(OVRInput.RawAxis1D.LHandTrigger) > 0.2f)
         {
+            isClipped = false;
             transform.parent = GameObject.FindWithTag("Projectiles").transform;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.name == "MagazineClip")
-        {
-            Debug.Log("true");
-            //GetComponent<Rigidbody>().isKinematic = false;
-            GetComponent<Collider>().isTrigger = false;
         }
     }
 

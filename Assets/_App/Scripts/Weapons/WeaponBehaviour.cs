@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WeaponBehaviour : MonoBehaviour
 {
+    public Transform magazineClip;
+
     [SerializeField]
     private GameObject ammoStock;
     [SerializeField]
