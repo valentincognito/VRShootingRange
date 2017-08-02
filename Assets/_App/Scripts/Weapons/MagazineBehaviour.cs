@@ -18,13 +18,17 @@ public class MagazineBehaviour : MonoBehaviour {
     private WeaponBehaviour weaponBehaviour;
 
     private OVRGrabbable ovrGrabbable;
-    
+    private AudioSource clipSound;
+
+
     public bool isClipped;
     public float distance;
 
     private void Start()
     {
         ovrGrabbable = GetComponent<OVRGrabbable>();
+
+        clipSound = GetComponent<AudioSource>();
 
         magazineCapacityDisplay.text = magazineCapacity.ToString();
         bulletsCountDisplay.text = bulletsCount.ToString();
@@ -61,6 +65,8 @@ public class MagazineBehaviour : MonoBehaviour {
         this.transform.GetComponent<Rigidbody>().isKinematic = true;
         this.transform.GetComponent<Collider>().isTrigger = true;
         isClipped = true;
+        clipSound.Play();
+
     }
     private void UnclipFromWeapon()
     {
@@ -88,6 +94,7 @@ public class MagazineBehaviour : MonoBehaviour {
         if (other.name == "GrabVolumeBig" && OVRInput.Get(OVRInput.RawAxis1D.LHandTrigger) > 0.2f)
         {
             isClipped = false;
+            clipSound.Play();
             transform.parent = GameObject.FindWithTag("Projectiles").transform;
         }
     }

@@ -15,6 +15,8 @@ public class WeaponBehaviour : MonoBehaviour
     [SerializeField]
     private ParticleSystem muzzleFlash;
     [SerializeField]
+    private ParticleSystem smoke;
+    [SerializeField]
     private MagazineBehaviour magazineBehaviour;
 
     public void Shoot()
@@ -36,6 +38,7 @@ public class WeaponBehaviour : MonoBehaviour
 
             muzzleFlash.Play();
             shoot.Play();
+            smoke.Play();
 
             magazineBehaviour.DiscardBullet();
         }
