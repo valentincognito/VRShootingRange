@@ -1,10 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WeaponBehaviour : MonoBehaviour
 {
     public Transform magazineClip;
+    public Text targetInfoDisplay;
+
+    //to clean
+    public Transform crosshair;
 
     [SerializeField]
     private GameObject ammoStock;
@@ -18,6 +23,20 @@ public class WeaponBehaviour : MonoBehaviour
     private ParticleSystem smoke;
     [SerializeField]
     private MagazineBehaviour magazineBehaviour;
+
+    private RaycastHit hit;
+
+    private void Update()
+    {
+        if (Physics.Raycast(spawnPoint.transform.position, spawnPoint.transform.forward, out hit))
+        {
+            targetInfoDisplay.text = hit.transform.name.ToString();
+
+            crosshair.position = hit.point;
+            //Debug.DrawRay(hit.point, spawnPoint.transform.forward, Color.red);
+        }
+        
+    }
 
     public void Shoot()
     {
@@ -41,6 +60,14 @@ public class WeaponBehaviour : MonoBehaviour
             smoke.Play();
 
             magazineBehaviour.DiscardBullet();
+
+            
+
+            if(Physics.Raycast(spawnPoint.transform.position, spawnPoint.transform.forward, out hit))
+            {
+                Debug.Log(hit.transform.name);
+            }
+            
         }
 
     }
